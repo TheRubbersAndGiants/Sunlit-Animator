@@ -25,7 +25,7 @@ class WebCanvas {
     bindEvents() {
         window.addEventListener('resize', () => {
             this.resizeCanvas();
-            this.drawStage([]);
+            if (window.App) window.App.updateGlobalUIState();
         });
 
         this.canvas.addEventListener('mousedown', (e) => {
@@ -42,7 +42,7 @@ class WebCanvas {
                 this.panOffset.x += deltaX;
                 this.panOffset.y += deltaY;
                 this.lastMousePos = { x: e.clientX, y: e.clientY };
-                this.drawStage([]);
+                if (window.App) window.App.updateGlobalUIState();
             }
         });
 
@@ -61,7 +61,30 @@ class WebCanvas {
             } else {
                 this.zoomLevel /= 1.1;
             }
-            this.drawStage([]);
+            if (window.App) window.App.updateGlobalUIState();
+        });
+
+        this.canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        this.canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                const file = e.dataTransfer.files[0];
+                if (file.type.match('image.*')) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const bitmapAsset = new ImportedBitmap(event.target.result, file.name);
+                        const currentLayerIdx = window.App.currentLayer;
+                        const currentFrameIdx = window.App.currentFrame;
+                        const activeKeyframe = window.App.timelineModel.layers[currentLayerIdx].getOrCreateFrame(currentFrameIdx);
+                        activeKeyframe.objects.push(bitmapAsset);
+                        window.App.updateGlobalUIState();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
         });
     }
 
@@ -110,6 +133,13 @@ class WebCanvas {
                     context.lineTo(ptX, ptY);
                 }
                 context.stroke();
+            } 
+            else if (obj instanceof ImportedBitmap) {
+                const img = new Image();
+                img.src = obj.filepath;
+                const posX = isWorkspace ? -100 : (width / 2 - 100);
+                const posY = isWorkspace ? -100 : (height / 2 - 100);
+                context.drawImage(img, posX, posY, 200, 200);
             }
         });
     }
