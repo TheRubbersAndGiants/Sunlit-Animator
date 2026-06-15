@@ -1,0 +1,479 @@
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+#app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+#workspace-container {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 180px);
+}
+
+#canvas-container {
+    flex: 1;
+    background-color: #121212;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#stage-canvas {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    cursor: grab;
+}
+
+#stage-canvas:active {
+    cursor: grabbing;
+}
+
+#properties-panel {
+    width: 280px;
+    background-color: #1E1E1E;
+    border-left: 2px solid #262626;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.panel-section h3 {
+    font-size: 11px;
+    color: #808080;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.prop-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    justify-content: space-between;
+}
+
+.prop-row label {
+    font-size: 12px;
+    color: #808080;
+    font-weight: bold;
+}
+
+#canvas-color-picker {
+    background: none;
+    border: none;
+    width: 40px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.panel-divider {
+    height: 1px;
+    background-color: #333333;
+    margin: 10px 0 15px 0;
+}
+
+#object-list-container {
+    flex: 1;
+    min-height: 120px;
+    background-color: #141414;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    overflow-y: auto;
+}
+
+#object-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#object-list li {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #1E1E1E;
+    color: #E0E0E0;
+}
+
+#object-list li.selected {
+    background-color: #333333;
+    color: #808080;
+    border: 1px solid #00A3FF;
+}
+
+.text-slider-pair {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.text-slider-pair input[type="number"] {
+    width: 45px;
+    background-color: #141414;
+    border: 1px solid #333333;
+    border-radius: 3px;
+    color: #E0E0E0;
+    padding: 3px;
+    text-align: center;
+}
+
+.text-slider-pair input[type="number"]:focus {
+    border: 1px solid #00A3FF;
+    outline: none;
+}
+
+.text-slider-pair input[type="range"] {
+    flex: 1;
+    accent-color: #808080;
+}
+
+#reset-ease-btn {
+    width: 100%;
+    background-color: #262626;
+    border: 1px solid #333333;
+    color: #E0E0E0;
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#reset-ease-btn:hover {
+    border: 1px solid #00A3FF;
+}
+
+#timeline-panel {
+    height: 180px;
+    background-color: #262626;
+    border-top: 2px solid #1E1E1E;
+    display: flex;
+}
+
+#layer-headers {
+    width: 100px;
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px 0;
+}
+
+.layer-header {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.layer-header.active {
+    background-color: #333333;
+    border: 1px solid #00A3FF;
+    color: #808080;
+}
+
+.layer-header.inactive {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    color: #00A3FF;
+}
+
+#timeline-tracks-scroll {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: #262626;
+    padding: 5px 0;
+}
+
+#timeline-tracks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.track-row {
+    display: flex;
+    gap: 1px;
+}
+
+.frame-cell {
+    width: 15px;
+    height: 24px;
+    background-color: #262626;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.frame-cell.active-selection {
+    background-color: #333333;
+    border: 1px solid #808080;
+}
+
+.frame-cell.tween-purple {
+    background-color: #7B2CBF;
+    border: 1px solid #333333;
+}
+
+.frame-cell.tween-orange {
+    background-color: #E65F2B;
+    border: 1px solid #333333;
+}
+
+.frame-cell.frame-grey {
+    background-color: #555555;
+    border: 1px solid #333333;
+}body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+#app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+#workspace-container {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 180px);
+}
+
+#canvas-container {
+    flex: 1;
+    background-color: #121212;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#stage-canvas {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    cursor: grab;
+}
+
+#stage-canvas:active {
+    cursor: grabbing;
+}
+
+#properties-panel {
+    width: 280px;
+    background-color: #1E1E1E;
+    border-left: 2px solid #262626;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.panel-section h3 {
+    font-size: 11px;
+    color: #808080;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.prop-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    justify-content: space-between;
+}
+
+.prop-row label {
+    font-size: 12px;
+    color: #808080;
+    font-weight: bold;
+}
+
+#canvas-color-picker {
+    background: none;
+    border: none;
+    width: 40px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.panel-divider {
+    height: 1px;
+    background-color: #333333;
+    margin: 10px 0 15px 0;
+}
+
+#object-list-container {
+    flex: 1;
+    min-height: 120px;
+    background-color: #141414;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    overflow-y: auto;
+}
+
+#object-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#object-list li {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #1E1E1E;
+    color: #E0E0E0;
+}
+
+#object-list li.selected {
+    background-color: #333333;
+    color: #808080;
+    border: 1px solid #00A3FF;
+}
+
+.text-slider-pair {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.text-slider-pair input[type="number"] {
+    width: 45px;
+    background-color: #141414;
+    border: 1px solid #333333;
+    border-radius: 3px;
+    color: #E0E0E0;
+    padding: 3px;
+    text-align: center;
+}
+
+.text-slider-pair input[type="number"]:focus {
+    border: 1px solid #00A3FF;
+    outline: none;
+}
+
+.text-slider-pair input[type="range"] {
+    flex: 1;
+    accent-color: #808080;
+}
+
+#reset-ease-btn {
+    width: 100%;
+    background-color: #262626;
+    border: 1px solid #333333;
+    color: #E0E0E0;
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#reset-ease-btn:hover {
+    border: 1px solid #00A3FF;
+}
+
+#timeline-panel {
+    height: 180px;
+    background-color: #262626;
+    border-top: 2px solid #1E1E1E;
+    display: flex;
+}
+
+#layer-headers {
+    width: 100px;
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px 0;
+}
+
+.layer-header {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.layer-header.active {
+    background-color: #333333;
+    border: 1px solid #00A3FF;
+    color: #808080;
+}
+
+.layer-header.inactive {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    color: #00A3FF;
+}
+
+#timeline-tracks-scroll {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: #262626;
+    padding: 5px 0;
+}
+
+#timeline-tracks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.track-row {
+    display: flex;
+    gap: 1px;
+}
+
+.frame-cell {
+    width: 15px;
+    height: 24px;
+    background-color: #262626;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.frame-cell.active-selection {
+    background-color: #333333;
+    border: 1px solid #808080;
+}
+
+.frame-cell.tween-purple {
+    background-color: #7B2CBF;
+    border: 1px solid #333333;
+}
+
+.frame-cell.tween-orange {
+    background-color: #E65F2B;
+    border: 1px solid #333333;
+}
+
+.frame-cell.frame-grey {
+    background-color: #555555;
+    border: 1px solid #333333;
+}
