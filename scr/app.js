@@ -5,10 +5,21 @@ class SunlitAnimatorApp {
         this.totalFrames = 60;
         this.totalLayers = 3;
 
+        this.createNewProject();
+    }
+
+    createNewProject() {
+        this.currentFrame = 0;
+        this.currentLayer = 0;
         this.timelineModel = new TimelineModel(this.totalFrames, this.totalLayers);
         
-        this.initModules();
-        this.bindGlobalEvents();
+        if (!this.canvasController) {
+            this.initModules();
+            this.bindGlobalEvents();
+        } else {
+            this.setCanvasColor("#FFFFFF");
+        }
+        
         this.updateGlobalUIState();
     }
 
@@ -77,25 +88,29 @@ class SunlitAnimatorApp {
     }
 
     updateGlobalUIState() {
-        this.timelineController.renderTracks();
+        if (this.timelineController) this.timelineController.renderTracks();
         
         const activeAssets = this.timelineModel.evaluateAtFrame(this.currentLayer, this.currentFrame);
-        this.propertiesController.refreshObjectList(activeAssets);
+        if (this.propertiesController) this.propertiesController.refreshObjectList(activeAssets);
         
         const layer = this.timelineModel.layers[this.currentLayer];
         const currentKf = layer.keyframes[this.currentFrame];
-        if (currentKf) {
-            this.propertiesController.setEasingDisplay(currentKf.easeValue);
-        } else {
-            this.propertiesController.setEasingDisplay(0);
+        if (this.propertiesController) {
+            if (currentKf) {
+                this.propertiesController.setEasingDisplay(currentKf.easeValue);
+            } else {
+                this.propertiesController.setEasingDisplay(0);
+            }
         }
 
-        this.canvasController.drawStage(activeAssets);
+        if (this.canvasController) this.canvasController.drawStage(activeAssets);
     }
 
     setCanvasColor(hexColor) {
         this.timelineModel.projectCanvasColor = hexColor;
         this.canvasController.updateStageBg(hexColor);
+        if (this.propertiesController) this.propertiesController.colorPicker.value = hexColor;
+        this.updateGlobalUIState();
     }
 
     updateActiveKeyframeEase(value) {
