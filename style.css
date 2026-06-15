@@ -24,7 +24,8 @@ body {
     padding-left: 10px;
     gap: 5px;
     box-sizing: border-box;
-    z-index: 100;
+    position: relative;
+    z-index: 1000;
 }
 
 .menu-item-dropdown {
@@ -40,6 +41,8 @@ body {
     padding: 4px 12px;
     cursor: pointer;
     border-radius: 3px;
+    height: 24px;
+    line-height: 16px;
 }
 
 .menu-btn:hover {
@@ -53,9 +56,12 @@ body {
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
     border: 1px solid #333333;
-    z-index: 101;
+    z-index: 1001;
     border-radius: 4px;
+    top: 100%;
+    left: 0;
     margin-top: 2px;
+    padding: 4px 0;
 }
 
 .dropdown-content button {
@@ -69,6 +75,7 @@ body {
     text-align: left;
     font-size: 12px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .dropdown-content button:hover {
@@ -90,6 +97,8 @@ body {
     display: flex;
     flex: 1;
     height: calc(100vh - 212px);
+    width: 100vw;
+    position: relative;
 }
 
 #canvas-container {
@@ -105,6 +114,7 @@ body {
 #stage-canvas {
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     cursor: grab;
+    background-color: transparent;
 }
 
 #stage-canvas:active {
@@ -119,6 +129,7 @@ body {
     flex-direction: column;
     padding: 10px;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .panel-section h3 {
@@ -232,6 +243,7 @@ body {
     display: flex;
     position: relative;
     z-index: 10;
+    width: 100vw;
 }
 
 #layer-headers {
@@ -281,6 +293,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    width: max-content;
 }
 
 .track-row {
