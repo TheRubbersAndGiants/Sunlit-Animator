@@ -10,6 +10,26 @@
 <body>
 
     <div id="app-shell">
+        <div id="top-menu-bar">
+            <div class="menu-item-dropdown">
+                <button class="menu-btn">File</button>
+                <div class="dropdown-content">
+                    <button id="menu-new-proj">New Project</button>
+                    <button id="menu-save-proj">Save Project (.sunap)</button>
+                    <div class="dropdown-divider"></div>
+                    <button id="menu-export-png">Export PNG Sequence</button>
+                    <button id="menu-export-mov">Export QuickTime Video</button>
+                </div>
+            </div>
+            <div class="menu-item-dropdown">
+                <button class="menu-btn">Insert</button>
+                <div class="dropdown-content">
+                    <button id="menu-import-bitmap">Import Bitmap Asset...</button>
+                </div>
+            </div>
+            <input type="file" id="hidden-asset-uploader" accept="image/*" style="display: none;">
+        </div>
+
         <div id="workspace-container">
             <div id="canvas-container">
                 <canvas id="stage-canvas"></canvas>
