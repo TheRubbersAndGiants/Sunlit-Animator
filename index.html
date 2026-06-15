@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunlit Animator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+
+    <div id="app-shell">
+        <div id="workspace-container">
+            <div id="canvas-container">
+                <canvas id="stage-canvas"></canvas>
+            </div>
+
+            <div id="properties-panel">
+                <div class="panel-section">
+                    <h3>STAGE PROPERTIES</h3>
+                    <div class="prop-row">
+                        <label>Canvas Color:</label>
+                        <input type="color" id="canvas-color-picker" value="#ffffff">
+                    </div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <div class="panel-section">
+                    <h3>OBJECTS ON FRAME</h3>
+                    <div id="object-list-container">
+                        <ul id="object-list"></ul>
+                    </div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <div class="panel-section">
+                    <h3>TRANSFORM & FILTERS</h3>
+                    <div class="prop-row text-slider-pair">
+                        <label>Brush Size:</label>
+                        <input type="number" id="brush-size-input" min="1" max="200" value="10">
+                        <input type="range" id="brush-size-slider" min="1" max="200" value="10">
+                    </div>
+                    <div class="prop-row text-slider-pair">
+                        <label>Ease Value:</label>
+                        <input type="number" id="ease-val-input" min="-1000" max="1000" value="0">
+                        <input type="range" id="ease-val-slider" min="-1000" max="1000" value="0">
+                    </div>
+                    <button id="reset-ease-btn">Reset Ease</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="timeline-panel">
+            <div id="layer-headers"></div>
+            <div id="timeline-tracks-scroll">
+                <div id="timeline-tracks-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/core/web_engine.js"></script>
+    <script src="src/core/web_export.js"></script>
+    <script src="src/ui/web_canvas.js"></script>
+    <script src="src/ui/web_timeline.js"></script>
+    <script src="src/ui/web_props.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>
